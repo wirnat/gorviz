@@ -1,0 +1,4989 @@
+models:
+    - name: Shift
+      table_name: shifts
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Name
+          type: string
+          tags:
+            json: '"name"'
+        - name: Type
+          type: shift.Type
+          tags:
+            json: '"type"'
+        - name: Status
+          type: status.Status
+          tags:
+            json: '"status"'
+        - name: UserShift
+          type: '[]UserShift'
+          tags:
+            gorm: '"foreignKey:ShiftUID;references:UID"'
+            json: '"user_shift"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: Shift
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Shift
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Shift
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Shift
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Shift
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Shift
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Shift
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Shift
+          target_model_name: UserShift
+          type: has_many
+          foreign_key: ShiftUID
+          references: UID
+          field_name: UserShift
+    - name: PromotionCode
+      table_name: promotion_codes
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Code
+          type: string
+          tags:
+            gorm: '"type:varchar(20);uniqueIndex:unique_promo_code"'
+            json: '"code"'
+        - name: MaxRedeem
+          type: int
+          tags:
+            json: '"max_redeem"'
+        - name: CurrentRedeem
+          type: int
+          tags:
+            gorm: '"default:0"'
+            json: '"current_redeem"'
+        - name: TrialPlanUID
+          type: id.UniqueID
+          tags:
+            json: '"trial_plan_uid"'
+        - name: TrialDurationDays
+          type: int
+          tags:
+            json: '"trial_duration_days"'
+        - name: ValidUntil
+          type: time.Time
+          tags:
+            json: '"valid_until"'
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"default:true"'
+            json: '"is_active"'
+        - name: Description
+          type: string
+          tags:
+            json: '"description"'
+        - name: TrialPlan
+          type: '*Plan'
+          tags:
+            gorm: '"foreignKey:TrialPlanUID;references:UID"'
+            json: '"trial_plan,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionCode
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionCode
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionCode
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionCode
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionCode
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionCode
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionCode
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionCode
+          target_model_name: Plan
+          type: belongs_to
+          foreign_key: TrialPlanUID
+          references: UID
+          field_name: TrialPlan
+    - name: Media
+      table_name: medias
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Type
+          type: MediaType
+          tags:
+            json: '"type"'
+        - name: Storage
+          type: string
+          tags:
+            gorm: '"type:varchar;"'
+            json: '"storage"'
+        - name: Mime
+          type: string
+          tags:
+            gorm: '"type:varchar(50);"'
+            json: '"mime"'
+        - name: Extension
+          type: string
+          tags:
+            gorm: '"type:varchar(20);"'
+            json: '"extension"'
+        - name: Size
+          type: int
+          tags:
+            json: '"size"'
+        - name: Bucket
+          type: string
+          tags:
+            gorm: '"type:varchar(100);"'
+            json: '"bucket"'
+        - name: Path
+          type: string
+          tags:
+            gorm: '"type:varchar;"'
+            json: '"path"'
+        - name: Filename
+          type: string
+          tags:
+            gorm: '"type:varchar;"'
+            json: '"filename"'
+        - name: Url
+          type: string
+          tags:
+            gorm: '"-"'
+            json: '"url,omitempty"'
+      relationships:
+        - source_model_name: Media
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Media
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Media
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Media
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Media
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Media
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Media
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: PromotionDiscountOutlet
+      table_name: promotion_discount_outlets
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionDiscountUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"promotion_discount_uid"'
+            null;index: idx_outlet_discount"
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"outlet_uid"'
+            null;index: idx_outlet_uid"
+        - name: OutletName
+          type: string
+          tags:
+            gorm: '"type:varchar(255);not'
+            json: '"outlet_name"'
+        - name: PromotionDiscount
+          type: '*PromotionDiscount'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"promotion_discount,omitempty"'
+          is_foreign_key: true
+        - name: Outlet
+          type: '*Outlet'
+          tags:
+            gorm: '"foreignKey:OutletUID;references:UID"'
+            json: '"outlet,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: PromotionDiscount
+          type: belongs_to
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: PromotionDiscount
+        - source_model_name: PromotionDiscountOutlet
+          target_model_name: Outlet
+          type: belongs_to
+          foreign_key: OutletUID
+          references: UID
+          field_name: Outlet
+    - name: Subscription
+      table_name: subscriptions
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: TenantUID
+          type: id.UniqueID
+          tags:
+            json: '"tenant_uid"'
+        - name: PlanUID
+          type: id.UniqueID
+          tags:
+            json: '"plan_uid"'
+        - name: FinalPrice
+          type: int64
+          tags:
+            json: '"final_price"'
+        - name: StartDate
+          type: time.Time
+          tags:
+            json: '"start_date"'
+        - name: EndDate
+          type: time.Time
+          tags:
+            json: '"end_date"'
+        - name: Status
+          type: SubscriptionStatus
+          tags:
+            json: '"status"'
+        - name: AutoRenew
+          type: bool
+          tags:
+            json: '"auto_renew"'
+        - name: IsTrialFromPromotion
+          type: bool
+          tags:
+            gorm: '"default:false"'
+            json: '"is_trial_from_promotion"'
+        - name: PromotionCodeUsed
+          type: string
+          tags:
+            json: '"promotion_code_used,omitempty"'
+        - name: Plan
+          type: '*Plan'
+          tags:
+            gorm: '"foreignKey:PlanUID;references:UID"'
+            json: '"plan"'
+          is_foreign_key: true
+        - name: XenditPlanID
+          type: string
+          tags:
+            json: '"xendit_plan_id,omitempty"'
+        - name: MaxOutlet
+          type: int
+          tags:
+            gorm: '"default:0"'
+            json: '"max_outlet"'
+      relationships:
+        - source_model_name: Subscription
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Subscription
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Subscription
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Subscription
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Subscription
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Subscription
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Subscription
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Subscription
+          target_model_name: Plan
+          type: belongs_to
+          foreign_key: PlanUID
+          references: UID
+          field_name: Plan
+    - name: Group
+      table_name: groups
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"outlet_uid"'
+            null;index: idx_groups_outlet_uid"
+        - name: Name
+          type: string
+          tags:
+            gorm: '"not'
+            json: '"name"'
+            null;size: 100"
+        - name: Description
+          type: '*string'
+          tags:
+            json: '"description"'
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"index:idx_groups_active"'
+            json: '"is_active"'
+        - name: Outlet
+          type: '*Outlet'
+          tags:
+            gorm: '"references:UID;foreignKey:OutletUID"'
+            json: '"outlet"'
+          is_foreign_key: true
+        - name: UserGroup
+          type: '[]UserGroup'
+          tags:
+            gorm: '"references:UID;foreignKey:GroupUID"'
+            json: '"user_group"'
+          is_foreign_key: true
+        - name: CommissionCondition
+          type: '[]CommissionCondition'
+          tags:
+            gorm: '"references:UID;foreignKey:GroupUID"'
+            json: '"commission_condition"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: Group
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Group
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Group
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Group
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Group
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Group
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Group
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Group
+          target_model_name: Outlet
+          type: belongs_to
+          foreign_key: OutletUID
+          references: UID
+          field_name: Outlet
+        - source_model_name: Group
+          target_model_name: UserGroup
+          type: has_many
+          foreign_key: GroupUID
+          references: UID
+          field_name: UserGroup
+        - source_model_name: Group
+          target_model_name: CommissionCondition
+          type: has_many
+          foreign_key: GroupUID
+          references: UID
+          field_name: CommissionCondition
+    - name: PromotionDiscountFreeService
+      table_name: promotion_discount_free_services
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionDiscountUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"promotion_discount_uid"'
+            null;index: idx_free_service_discount"
+        - name: ItemUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"item_uid"'
+            null;index: idx_free_service_item"
+        - name: ItemName
+          type: string
+          tags:
+            gorm: '"type:varchar(255);not'
+            json: '"item_name"'
+        - name: Quantity
+          type: int
+          tags:
+            gorm: '"not'
+            json: '"quantity"'
+        - name: ItemPrice
+          type: float64
+          tags:
+            gorm: '"not'
+            json: '"item_price"'
+        - name: DurationOnMinute
+          type: int64
+          tags:
+            json: '"duration_on_minute"'
+      relationships:
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionDiscountFreeService
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: AffiliateBalance
+      table_name: affiliate_balances
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: UserAffiliateUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:char(36);index;not'
+            json: '"user_affiliate_uid"'
+        - name: AvailableBalance
+          type: float64
+          tags:
+            gorm: '"type:decimal(15,2);default:0;not'
+            json: '"available_balance"'
+        - name: PendingWithdrawals
+          type: float64
+          tags:
+            gorm: '"type:decimal(15,2);default:0;not'
+            json: '"pending_withdrawals"'
+        - name: TotalEarnings
+          type: float64
+          tags:
+            gorm: '"type:decimal(15,2);default:0;not'
+            json: '"total_earnings"'
+        - name: LastTransactionAt
+          type: '*time.Time'
+          tags:
+            gorm: '"index"'
+            json: '"last_transaction_at"'
+        - name: UserAffiliate
+          type: '*UserAffiliate'
+          tags:
+            gorm: '"foreignKey:UserAffiliateUID;references:UID"'
+            json: '"user_affiliate,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: AffiliateBalance
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: AffiliateBalance
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: AffiliateBalance
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: AffiliateBalance
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: AffiliateBalance
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: AffiliateBalance
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: AffiliateBalance
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: AffiliateBalance
+          target_model_name: UserAffiliate
+          type: belongs_to
+          foreign_key: UserAffiliateUID
+          references: UID
+          field_name: UserAffiliate
+    - name: MediaAssignment
+      table_name: media_assignments
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Assigned
+          type: string
+          tags:
+            json: '"assigned"'
+        - name: AssignedToUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:varchar(36);uniqueIndex:,composite:media_assignment_unique;not'
+            json: '"assigned_to_uid"'
+        - name: MediaUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:varchar(36);uniqueIndex:,composite:media_assignment_unique;not'
+            json: '"media_uid"'
+        - name: MediaType
+          type: string
+          tags:
+            json: '"media_type"'
+        - name: IsDefault
+          type: bool
+          tags:
+            json: '"is_default"'
+        - name: Media
+          type: '*Media'
+          tags:
+            gorm: '"<-:false;-:migration;foreignKey:UID;references:MediaUID"'
+            json: '"media,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: MediaAssignment
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: MediaAssignment
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: MediaAssignment
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: MediaAssignment
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: MediaAssignment
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: MediaAssignment
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: MediaAssignment
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: MediaAssignment
+          target_model_name: Media
+          type: belongs_to
+          foreign_key: UID
+          references: MediaUID
+          field_name: Media
+    - name: Tenant
+      table_name: tenants
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Name
+          type: string
+          tags:
+            json: '"name"'
+        - name: UserUID
+          type: string
+          tags:
+            json: '"user_uid"'
+        - name: ReferralCode
+          type: string
+          tags:
+            json: '"referral_code"'
+        - name: LastSubscription
+          type: '*Subscription'
+          tags:
+            gorm: '"foreignKey:TenantUID;references:UID"'
+            json: '"last_subscription"'
+          is_foreign_key: true
+        - name: User
+          type: '*User'
+          tags:
+            gorm: '"foreignKey:UserUID;references:UID"'
+            json: '"user"'
+          is_foreign_key: true
+        - name: XenditCustomerUUID
+          type: string
+          tags:
+            json: '"xendit_customer_uuid"'
+        - name: XenditPaymentMethodID
+          type: string
+          tags:
+            json: '"xendit_payment_method_id"'
+      relationships:
+        - source_model_name: Tenant
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Tenant
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Tenant
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Tenant
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Tenant
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Tenant
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Tenant
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Tenant
+          target_model_name: Subscription
+          type: belongs_to
+          foreign_key: TenantUID
+          references: UID
+          field_name: LastSubscription
+        - source_model_name: Tenant
+          target_model_name: User
+          type: belongs_to
+          foreign_key: UserUID
+          references: UID
+          field_name: User
+    - name: Plan
+      table_name: plans
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Name
+          type: string
+          tags:
+            json: '"name"'
+        - name: BillingCycle
+          type: PlanBillingCycle
+          tags:
+            json: '"billing_cycle"'
+        - name: Recommended
+          type: bool
+          tags:
+            json: '"recommended"'
+        - name: BasePrice
+          type: float64
+          tags:
+            json: '"base_price"'
+        - name: FinalPrice
+          type: float64
+          tags:
+            json: '"final_price"'
+        - name: IsActive
+          type: bool
+          tags:
+            json: '"is_active"'
+        - name: MaxOutlet
+          type: int
+          tags:
+            json: '"max_outlet"'
+        - name: ShortDescription
+          type: string
+          tags:
+            json: '"short_description"'
+        - name: LongDescription
+          type: string
+          tags:
+            json: '"long_description"'
+        - name: AdditionalOutletPrice
+          type: float64
+          tags:
+            json: '"additional_outlet_price"'
+        - name: MaxAdditionalOutlets
+          type: int
+          tags:
+            json: '"max_additional_outlets"'
+        - name: PlanFeature
+          type: '[]PlanFeature'
+          tags:
+            gorm: '"foreignKey:PlanID;references:UID"'
+            json: '"feature"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: Plan
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Plan
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Plan
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Plan
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Plan
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Plan
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Plan
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Plan
+          target_model_name: PlanFeature
+          type: has_many
+          foreign_key: PlanID
+          references: UID
+          field_name: PlanFeature
+    - name: PromotionDiscount
+      table_name: promotion_discounts
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: TenantUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"tenant_uid"'
+            null;index: idx_promotion_discount_tenant"
+        - name: Name
+          type: string
+          tags:
+            gorm: '"type:varchar(64);not'
+            json: '"name"'
+            null;index: idx_promotion_discount_name"
+        - name: Description
+          type: string
+          tags:
+            gorm: '"type:varchar(256)"'
+            json: '"description"'
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"default:true;index:idx_promotion_discount_active"'
+            json: '"is_active"'
+        - name: DiscountType
+          type: string
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"discount_type"'
+            null;index: idx_promotion_discount_type;check:discount_type
+        - name: BenefitType
+          type: string
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"benefit_type"'
+            null;check: benefit_type
+        - name: PercentageValue
+          type: '*int'
+          tags:
+            gorm: '"type:int"'
+            json: '"percentage_value"'
+        - name: NominalValue
+          type: '*int'
+          tags:
+            gorm: '"type:int"'
+            json: '"nominal_value"'
+        - name: FreeProductUID
+          type: '*id.UniqueID'
+          tags:
+            gorm: '"type:char(36)"'
+            json: '"free_product_uid"'
+        - name: FreeServiceUID
+          type: '*id.UniqueID'
+          tags:
+            gorm: '"type:char(36)"'
+            json: '"free_service_uid"'
+        - name: PromoBasedOn
+          type: string
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"promo_based_on"'
+            null;check: promo_based_on
+        - name: MinimumPurchase
+          type: '*int'
+          tags:
+            gorm: '"type:int"'
+            json: '"minimum_purchase"'
+        - name: MinimumQuantity
+          type: '*int'
+          tags:
+            gorm: '"type:int"'
+            json: '"minimum_quantity"'
+        - name: PromoActivation
+          type: string
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"promo_activation"'
+            null;default: '''manual'';check:promo_activation'
+        - name: ValidityStartAt
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"validity_start_at"'
+            null;index: idx_promotion_discount_validity"
+        - name: ValidityEndAt
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"validity_end_at"'
+            null;index: idx_promotion_discount_validity"
+        - name: ValidityIsAllDay
+          type: bool
+          tags:
+            gorm: '"default:true"'
+            json: '"validity_is_all_day"'
+        - name: ValidityStartTime
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(5)"'
+            json: '"validity_start_time"'
+        - name: ValidityEndTime
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(5)"'
+            json: '"validity_end_time"'
+        - name: CanCombineWithOtherPromos
+          type: bool
+          tags:
+            gorm: '"default:false"'
+            json: '"can_combine_with_other_promos"'
+        - name: PromotionDiscountOutlets
+          type: '[]*PromotionDiscountOutlet'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"promotion_discount_outlets,omitempty"'
+          is_foreign_key: true
+        - name: TargetItems
+          type: '[]PromotionDiscountTargetItem'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"target_items,omitempty"'
+          is_foreign_key: true
+        - name: FreeProducts
+          type: '[]PromotionDiscountFreeProduct'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"free_products,omitempty"'
+          is_foreign_key: true
+        - name: FreeServices
+          type: '[]PromotionDiscountFreeService'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"free_services,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionDiscount
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionDiscount
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionDiscount
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionDiscount
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionDiscount
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionDiscount
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionDiscount
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionDiscount
+          target_model_name: '*PromotionDiscountOutlet'
+          type: has_many
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: PromotionDiscountOutlets
+        - source_model_name: PromotionDiscount
+          target_model_name: PromotionDiscountTargetItem
+          type: has_many
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: TargetItems
+        - source_model_name: PromotionDiscount
+          target_model_name: PromotionDiscountFreeProduct
+          type: has_many
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: FreeProducts
+        - source_model_name: PromotionDiscount
+          target_model_name: PromotionDiscountFreeService
+          type: has_many
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: FreeServices
+    - name: SystemMetadata
+      table_name: system_metadata
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Key
+          type: string
+          tags:
+            gorm: '"uniqueIndex;size:255"'
+            json: '"key"'
+        - name: Value
+          type: string
+          tags:
+            gorm: '"type:text"'
+            json: '"value"'
+        - name: Description
+          type: string
+          tags:
+            gorm: '"size:500"'
+            json: '"description"'
+      relationships:
+        - source_model_name: SystemMetadata
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: SystemMetadata
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: SystemMetadata
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: SystemMetadata
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: SystemMetadata
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: SystemMetadata
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: SystemMetadata
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: CommissionCondition
+      table_name: commission_conditions
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: ItemServiceUID
+          type: '*id.UniqueID'
+          tags:
+            gorm: '"index:idx_commission_conditions_item_service_uid"'
+            json: '"item_service_uid"'
+        - name: ItemProductUID
+          type: '*id.UniqueID'
+          tags:
+            gorm: '"index:idx_commission_conditions_item_product_uid"'
+            json: '"item_product_uid"'
+        - name: GroupUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"group_uid"'
+            null;index: idx_commission_conditions_group_uid"
+        - name: CalculationType
+          type: string
+          tags:
+            gorm: '"not'
+            json: '"calculation_type"'
+            null;size: 20;check:calculation_type
+        - name: Value
+          type: float64
+          tags:
+            gorm: '"not'
+            json: '"value"'
+            null;type: decimal(10,2);check:value
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"default:true;index:idx_commission_conditions_active"'
+            json: '"is_active"'
+        - name: ItemService
+          type: '*ItemService'
+          tags:
+            gorm: '"references:UID;foreignKey:ItemServiceUID"'
+            json: '"item_service"'
+          is_foreign_key: true
+        - name: ItemProduct
+          type: '*ItemProduct'
+          tags:
+            gorm: '"references:UID;foreignKey:ItemProductUID"'
+            json: '"item_product"'
+          is_foreign_key: true
+        - name: Group
+          type: '*Group'
+          tags:
+            gorm: '"references:UID;foreignKey:GroupUID"'
+            json: '"group"'
+          is_foreign_key: true
+        - name: CreatedBy
+          type: '*User'
+          tags:
+            gorm: '"references:CreatedBy;foreignKey:UID"'
+            json: '"created_by"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: CommissionCondition
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: CommissionCondition
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: CommissionCondition
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: CommissionCondition
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: CommissionCondition
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: CommissionCondition
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: CommissionCondition
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: CommissionCondition
+          target_model_name: ItemService
+          type: belongs_to
+          foreign_key: ItemServiceUID
+          references: UID
+          field_name: ItemService
+        - source_model_name: CommissionCondition
+          target_model_name: ItemProduct
+          type: belongs_to
+          foreign_key: ItemProductUID
+          references: UID
+          field_name: ItemProduct
+        - source_model_name: CommissionCondition
+          target_model_name: Group
+          type: belongs_to
+          foreign_key: GroupUID
+          references: UID
+          field_name: Group
+        - source_model_name: CommissionCondition
+          target_model_name: User
+          type: belongs_to
+          foreign_key: UID
+          references: CreatedBy
+          field_name: CreatedBy
+    - name: UserGroup
+      table_name: user_groups
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: UserUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"user_uid"'
+            null;index: idx_user_groups_user_uid"
+            null;uniqueIndex: ',where:deleted_at'
+        - name: GroupUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"group_uid"'
+            null;index: idx_user_groups_group_uid"
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"default:true;index:idx_user_groups_active"'
+            json: '"is_active"'
+        - name: AssignedAt
+          type: '*time.Time'
+          tags:
+            gorm: '"default:CURRENT_TIMESTAMP"'
+            json: '"assigned_at"'
+        - name: AssignedBy
+          type: '*id.UniqueID'
+          tags:
+            json: '"assigned_by"'
+        - name: User
+          type: '*User'
+          tags:
+            gorm: '"references:UID;foreignKey:UserUID"'
+            json: '"user"'
+          is_foreign_key: true
+        - name: Group
+          type: '*Group'
+          tags:
+            gorm: '"references:UID;foreignKey:GroupUID"'
+            json: '"group"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: UserGroup
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: UserGroup
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: UserGroup
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: UserGroup
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: UserGroup
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: UserGroup
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: UserGroup
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: UserGroup
+          target_model_name: User
+          type: belongs_to
+          foreign_key: UserUID
+          references: UID
+          field_name: User
+        - source_model_name: UserGroup
+          target_model_name: Group
+          type: belongs_to
+          foreign_key: GroupUID
+          references: UID
+          field_name: Group
+    - name: PromotionDiscountFreeProduct
+      table_name: promotion_discount_free_products
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionDiscountUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"promotion_discount_uid"'
+            null;index: idx_free_product_discount"
+        - name: ItemUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"item_uid"'
+            null;index: idx_free_product_item"
+        - name: ItemName
+          type: string
+          tags:
+            gorm: '"type:varchar(255);not'
+            json: '"item_name"'
+        - name: Quantity
+          type: int
+          tags:
+            gorm: '"not'
+            json: '"quantity"'
+        - name: ItemPrice
+          type: float64
+          tags:
+            gorm: '"not'
+            json: '"item_price"'
+      relationships:
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionDiscountFreeProduct
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: AffiliateGroupMember
+      table_name: affiliate_group_members
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: AffiliateGroupCommissionUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:char(36);index;not'
+            json: '"affiliate_group_commission_uid"'
+        - name: UserAffiliateUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:char(36);index;not'
+            json: '"user_affiliate_uid"'
+        - name: AffiliateGroupCommission
+          type: AffiliateGroupCommission
+          tags:
+            gorm: '"foreignKey:AffiliateGroupCommissionUID;references:UID"'
+            json: '"affiliate_group_commission,omitempty"'
+          is_foreign_key: true
+        - name: UserAffiliate
+          type: UserAffiliate
+          tags:
+            gorm: '"foreignKey:UserAffiliateUID;references:UID"'
+            json: '"user_affiliate,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: AffiliateGroupMember
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: AffiliateGroupMember
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: AffiliateGroupMember
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: AffiliateGroupMember
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: AffiliateGroupMember
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: AffiliateGroupMember
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: AffiliateGroupMember
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: AffiliateGroupMember
+          target_model_name: AffiliateGroupCommission
+          type: belongs_to
+          foreign_key: AffiliateGroupCommissionUID
+          references: UID
+          field_name: AffiliateGroupCommission
+        - source_model_name: AffiliateGroupMember
+          target_model_name: UserAffiliate
+          type: belongs_to
+          foreign_key: UserAffiliateUID
+          references: UID
+          field_name: UserAffiliate
+    - name: AffiliateGroupCommission
+      table_name: affiliate_group_commissions
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Name
+          type: string
+          tags:
+            gorm: '"type:varchar(255);not'
+            json: '"name"'
+        - name: CommissionType
+          type: string
+          tags:
+            gorm: '"type:varchar(20);'
+            json: '"commission_type"'
+        - name: CommissionValue
+          type: float64
+          tags:
+            gorm: '"type:decimal(10,2);'
+            json: '"commission_value"'
+        - name: Description
+          type: '*string'
+          tags:
+            gorm: '"type:text"'
+            json: '"description,omitempty"'
+        - name: XenditSplitRuleID
+          type: '*string'
+          tags:
+            gorm: '"index"'
+            json: '"xendit_split_rule_id"'
+      relationships:
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: AffiliateGroupCommission
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: CapsterBreakTime
+      table_name: capster_break_times
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"outlet_uid"'
+        - name: CapsterUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"capster_uid"'
+        - name: Name
+          type: string
+          tags:
+            gorm: '"not'
+            json: '"name"'
+            null;size: 100"
+        - name: Description
+          type: '*string'
+          tags:
+            gorm: '"size:255"'
+            json: '"description"'
+        - name: Days
+          type: '[]day.Name'
+          tags:
+            gorm: '"serializer:json;not'
+            json: '"days"'
+        - name: StartTime
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"start_time"'
+        - name: EndTime
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"end_time"'
+        - name: EffectiveFrom
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"effective_from"'
+        - name: EffectiveUntil
+          type: '*time.Time'
+          tags:
+            json: '"effective_until"'
+        - name: Status
+          type: status.Status
+          tags:
+            gorm: '"default:''active''"'
+            json: '"status"'
+        - name: CreatedBy
+          type: id.UniqueID
+          tags:
+            json: '"created_by"'
+        - name: UpdatedBy
+          type: '*id.UniqueID'
+          tags:
+            json: '"updated_by"'
+      relationships:
+        - source_model_name: CapsterBreakTime
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: CapsterBreakTime
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: CapsterBreakTime
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: CapsterBreakTime
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: CapsterBreakTime
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: CapsterBreakTime
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: CapsterBreakTime
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: CapsterBreakTime
+          target_model_name: day.Name
+          type: has_many
+          field_name: Days
+    - name: PromotionCouponItem
+      table_name: promotion_coupon_items
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionCouponUID
+          type: id.UniqueID
+          tags:
+            json: '"promotion_coupon_uid"'
+        - name: ItemUID
+          type: id.UniqueID
+          tags:
+            json: '"item_uid"'
+        - name: PromotionCoupon
+          type: '*PromotionCoupon'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"promotion_coupon,omitempty"'
+          is_foreign_key: true
+        - name: Item
+          type: '*Item'
+          tags:
+            gorm: '"foreignKey:ItemUID;references:UID"'
+            json: '"item,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionCouponItem
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionCouponItem
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionCouponItem
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionCouponItem
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionCouponItem
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionCouponItem
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionCouponItem
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionCouponItem
+          target_model_name: PromotionCoupon
+          type: belongs_to
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: PromotionCoupon
+        - source_model_name: PromotionCouponItem
+          target_model_name: Item
+          type: belongs_to
+          foreign_key: ItemUID
+          references: UID
+          field_name: Item
+    - name: PlanFeature
+      table_name: plans_features
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PlanID
+          type: id.UniqueID
+          tags:
+            json: '"plan_id"'
+        - name: FeatureID
+          type: id.UniqueID
+          tags:
+            json: '"feature_id"'
+        - name: Feature
+          type: Feature
+          tags:
+            gorm: '"foreignKey:FeatureID;references:UID"'
+            json: '"feature"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PlanFeature
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PlanFeature
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PlanFeature
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PlanFeature
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PlanFeature
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PlanFeature
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PlanFeature
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PlanFeature
+          target_model_name: Feature
+          type: belongs_to
+          foreign_key: FeatureID
+          references: UID
+          field_name: Feature
+    - name: PromotionDiscountTargetItem
+      table_name: promotion_discount_target_items
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionDiscountUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"promotion_discount_uid"'
+            null;index: idx_target_item_discount"
+        - name: ItemUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"item_uid"'
+            null;index: idx_target_item_uid"
+        - name: ItemName
+          type: string
+          tags:
+            gorm: '"type:varchar(255);not'
+            json: '"item_name"'
+        - name: ItemType
+          type: string
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"item_type"'
+            null;check: item_type
+        - name: ItemPrice
+          type: int
+          tags:
+            gorm: '"not'
+            json: '"item_price"'
+        - name: PromotionDiscount
+          type: '*PromotionDiscount'
+          tags:
+            gorm: '"foreignKey:PromotionDiscountUID;references:UID"'
+            json: '"promotion_discount,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionDiscountTargetItem
+          target_model_name: PromotionDiscount
+          type: belongs_to
+          foreign_key: PromotionDiscountUID
+          references: UID
+          field_name: PromotionDiscount
+    - name: PromotionCoupon
+      table_name: promotion_coupons
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: TenantUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"tenant_uid"'
+            null;index: idx_promotion_coupon_tenant"
+        - name: Name
+          type: string
+          tags:
+            gorm: '"type:varchar(120);not'
+            json: '"name"'
+            null;index: idx_promotion_coupon_name"
+        - name: Description
+          type: '*string'
+          tags:
+            gorm: '"type:text"'
+            json: '"description"'
+        - name: InternalNote
+          type: '*string'
+          tags:
+            gorm: '"type:text"'
+            json: '"internal_note"'
+        - name: IsActive
+          type: bool
+          tags:
+            gorm: '"default:true"'
+            json: '"is_active"'
+        - name: CouponType
+          type: CouponType
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"coupon_type"'
+        - name: CaseSensitivity
+          type: CaseSensitivity
+          tags:
+            gorm: '"type:varchar(20);not'
+            json: '"case_sensitivity"'
+            null;default: '''uppercase_only''"'
+        - name: CodePolicy
+          type: JSONB
+          tags:
+            gorm: '"type:jsonb"'
+            json: '"code_policy"'
+        - name: Benefit
+          type: JSONB
+          tags:
+            gorm: '"type:jsonb"'
+            json: '"benefit"'
+        - name: ApplyToAllItems
+          type: bool
+          tags:
+            gorm: '"default:true"'
+            json: '"apply_to_all_items"'
+        - name: CanCombineWithOtherPromos
+          type: bool
+          tags:
+            gorm: '"default:false"'
+            json: '"can_combine_with_other_promos"'
+        - name: MinimumOrder
+          type: '*float64'
+          tags:
+            json: '"minimum_order"'
+        - name: ValidityStartAt
+          type: time.Time
+          tags:
+            json: '"validity_start_at"'
+        - name: ValidityEndAt
+          type: time.Time
+          tags:
+            json: '"validity_end_at"'
+        - name: CouponCount
+          type: int
+          tags:
+            gorm: '"default:0"'
+            json: '"coupon_count"'
+        - name: RedeemedCount
+          type: int
+          tags:
+            gorm: '"default:0"'
+            json: '"redeemed_count"'
+        - name: Tenant
+          type: '*Tenant'
+          tags:
+            gorm: '"foreignKey:TenantUID;references:UID"'
+            json: '"tenant,omitempty"'
+          is_foreign_key: true
+        - name: CouponCodes
+          type: '[]*PromotionCouponCode'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"coupon_codes,omitempty"'
+          is_foreign_key: true
+        - name: PromotionCouponItems
+          type: '[]*PromotionCouponItem'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"promotion_coupon_items,omitempty"'
+          is_foreign_key: true
+        - name: PromotionCouponOutlets
+          type: '[]*PromotionCouponOutlet'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"promotion_coupon_outlets,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionCoupon
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionCoupon
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionCoupon
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionCoupon
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionCoupon
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionCoupon
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionCoupon
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionCoupon
+          target_model_name: Tenant
+          type: belongs_to
+          foreign_key: TenantUID
+          references: UID
+          field_name: Tenant
+        - source_model_name: PromotionCoupon
+          target_model_name: '*PromotionCouponCode'
+          type: has_many
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: CouponCodes
+        - source_model_name: PromotionCoupon
+          target_model_name: '*PromotionCouponItem'
+          type: has_many
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: PromotionCouponItems
+        - source_model_name: PromotionCoupon
+          target_model_name: '*PromotionCouponOutlet'
+          type: has_many
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: PromotionCouponOutlets
+    - name: PromotionCouponOutlet
+      table_name: promotion_coupon_outlets
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionCouponUID
+          type: id.UniqueID
+          tags:
+            json: '"promotion_coupon_uid"'
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            json: '"outlet_uid"'
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            gorm: '"autoCreateTime"'
+            json: '"created_at"'
+        - name: PromotionCoupon
+          type: '*PromotionCoupon'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"promotion_coupon,omitempty"'
+          is_foreign_key: true
+        - name: Outlet
+          type: '*Outlet'
+          tags:
+            gorm: '"foreignKey:OutletUID;references:UID"'
+            json: '"outlet,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: PromotionCoupon
+          type: belongs_to
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: PromotionCoupon
+        - source_model_name: PromotionCouponOutlet
+          target_model_name: Outlet
+          type: belongs_to
+          foreign_key: OutletUID
+          references: UID
+          field_name: Outlet
+    - name: Feature
+      table_name: features
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: Name
+          type: string
+          tags:
+            json: '"name"'
+        - name: Description
+          type: string
+          tags:
+            json: '"description"'
+        - name: Status
+          type: FeatureStatus
+          tags:
+            json: '"status"'
+        - name: Usage
+          type: string
+          tags:
+            json: '"usage"'
+        - name: FeatureAccess
+          type: '[]FeatureAccess'
+          tags:
+            gorm: '"foreignKey:FeatureUID;references:UID"'
+            json: '"access"'
+          is_foreign_key: true
+        - name: StarFeature
+          type: bool
+          tags:
+            json: '"star_feature"'
+      relationships:
+        - source_model_name: Feature
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Feature
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Feature
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Feature
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Feature
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Feature
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Feature
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Feature
+          target_model_name: FeatureAccess
+          type: has_many
+          foreign_key: FeatureUID
+          references: UID
+          field_name: FeatureAccess
+    - name: AffiliateTransaction
+      table_name: affiliate_transactions
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: UserAffiliateUID
+          type: id.UniqueID
+          tags:
+            gorm: '"type:char(36);index;not'
+            json: '"user_affiliate_uid"'
+        - name: Type
+          type: AffiliateTransactionType
+          tags:
+            gorm: '"type:varchar(20);index;not'
+            json: '"type"'
+        - name: Status
+          type: AffiliateTransactionStatus
+          tags:
+            gorm: '"type:varchar(20);index;not'
+            json: '"status"'
+        - name: Amount
+          type: float64
+          tags:
+            gorm: '"type:decimal(15,2);not'
+            json: '"amount"'
+        - name: Description
+          type: string
+          tags:
+            gorm: '"type:text"'
+            json: '"description"'
+        - name: ReferenceID
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(100);index"'
+            json: '"reference_id,omitempty"'
+        - name: ReferenceType
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(50)"'
+            json: '"reference_type,omitempty"'
+        - name: AdminNotes
+          type: '*string'
+          tags:
+            gorm: '"type:text"'
+            json: '"admin_notes,omitempty"'
+        - name: ProcessedAt
+          type: '*time.Time'
+          tags:
+            gorm: '"index"'
+            json: '"processed_at,omitempty"'
+        - name: ProcessedBy
+          type: '*id.UniqueID'
+          tags:
+            gorm: '"type:char(36);index"'
+            json: '"processed_by,omitempty"'
+        - name: XenditPayoutID
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(255);index"'
+            json: '"xendit_payout_id,omitempty"'
+        - name: PayoutStatus
+          type: '*string'
+          tags:
+            gorm: '"type:varchar(50)"'
+            json: '"payout_status,omitempty"'
+        - name: UserAffiliate
+          type: '*UserAffiliate'
+          tags:
+            gorm: '"foreignKey:UserAffiliateUID;references:UID"'
+            json: '"user_affiliate,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: AffiliateTransaction
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: AffiliateTransaction
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: AffiliateTransaction
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: AffiliateTransaction
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: AffiliateTransaction
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: AffiliateTransaction
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: AffiliateTransaction
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: AffiliateTransaction
+          target_model_name: UserAffiliate
+          type: belongs_to
+          foreign_key: UserAffiliateUID
+          references: UID
+          field_name: UserAffiliate
+    - name: SubscriptionPayment
+      table_name: subscriptions_payments
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: TenantUID
+          type: id.UniqueID
+          tags:
+            json: '"tenant_uid"'
+        - name: SubscriptionUID
+          type: id.UniqueID
+          tags:
+            json: '"subscription_uid"'
+        - name: ReferenceID
+          type: int
+          tags:
+            json: '"reference_id"'
+        - name: Amount
+          type: float64
+          tags:
+            json: '"amount"'
+        - name: PaymentCode
+          type: string
+          tags:
+            json: '"payment_code"'
+        - name: PaymentChannel
+          type: string
+          tags:
+            json: '"payment_channel"'
+        - name: PaymentDate
+          type: time.Time
+          tags:
+            json: '"payment_date"'
+        - name: Status
+          type: SubscriptionPaymentStatus
+          tags:
+            json: '"status"'
+        - name: IsReferralPayout
+          type: bool
+          tags:
+            json: '"is_referral_payout"'
+        - name: ReferralRecipientID
+          type: id.UniqueID
+          tags:
+            json: '"referral_recipient_id"'
+        - name: Description
+          type: string
+          tags:
+            json: '"description"'
+        - name: PaymentType
+          type: string
+          tags:
+            json: '"payment_type"'
+        - name: OutletUID
+          type: '*id.UniqueID'
+          tags:
+            json: '"outlet_uid,omitempty"'
+        - name: AdditionalOutletCount
+          type: int
+          tags:
+            json: '"additional_outlet_count"'
+        - name: Subcription
+          type: '*Subscription'
+          tags:
+            gorm: '"foreignKey:SubscriptionUID;references:UID"'
+            json: '"subcription,omitempty"'
+          is_foreign_key: true
+        - name: Tenant
+          type: '*Tenant'
+          tags:
+            gorm: '"foreignKey:TenantUID;references:UID"'
+            json: '"tenant,omitempty"'
+          is_foreign_key: true
+        - name: Outlet
+          type: '*Outlet'
+          tags:
+            gorm: '"foreignKey:OutletUID;references:UID"'
+            json: '"outlet,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: SubscriptionPayment
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: SubscriptionPayment
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: SubscriptionPayment
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: SubscriptionPayment
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: SubscriptionPayment
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: SubscriptionPayment
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: SubscriptionPayment
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: SubscriptionPayment
+          target_model_name: Subscription
+          type: belongs_to
+          foreign_key: SubscriptionUID
+          references: UID
+          field_name: Subcription
+        - source_model_name: SubscriptionPayment
+          target_model_name: Tenant
+          type: belongs_to
+          foreign_key: TenantUID
+          references: UID
+          field_name: Tenant
+        - source_model_name: SubscriptionPayment
+          target_model_name: Outlet
+          type: belongs_to
+          foreign_key: OutletUID
+          references: UID
+          field_name: Outlet
+    - name: Attendance
+      table_name: attendances
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: UserUID
+          type: id.UniqueID
+          tags:
+            gorm: '"index;not'
+            json: '"user_uid"'
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            gorm: '"index;not'
+            json: '"outlet_uid"'
+        - name: Type
+          type: consts.AttendanceType
+          tags:
+            gorm: '"not'
+            json: '"type"'
+        - name: Status
+          type: consts.AttendanceStatus
+          tags:
+            gorm: '"default:active"'
+            json: '"status"'
+        - name: Timestamp
+          type: time.Time
+          tags:
+            gorm: '"not'
+            json: '"timestamp"'
+        - name: Latitude
+          type: '*float64'
+          tags:
+            json: '"latitude,omitempty"'
+        - name: Longitude
+          type: '*float64'
+          tags:
+            json: '"longitude,omitempty"'
+        - name: Address
+          type: '*string'
+          tags:
+            json: '"address,omitempty"'
+        - name: Notes
+          type: '*string'
+          tags:
+            json: '"notes,omitempty"'
+        - name: DeviceInfo
+          type: '*string'
+          tags:
+            json: '"device_info,omitempty"'
+        - name: IPAddress
+          type: '*string'
+          tags:
+            json: '"ip_address,omitempty"'
+        - name: User
+          type: '*User'
+          tags:
+            gorm: '"references:UID;foreignKey:UserUID"'
+            json: '"user,omitempty"'
+          is_foreign_key: true
+        - name: Outlet
+          type: '*Outlet'
+          tags:
+            gorm: '"references:UID;foreignKey:OutletUID"'
+            json: '"outlet,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: Attendance
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Attendance
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Attendance
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Attendance
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Attendance
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Attendance
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Attendance
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: Attendance
+          target_model_name: User
+          type: belongs_to
+          foreign_key: UserUID
+          references: UID
+          field_name: User
+        - source_model_name: Attendance
+          target_model_name: Outlet
+          type: belongs_to
+          foreign_key: OutletUID
+          references: UID
+          field_name: Outlet
+    - name: Customer
+      table_name: customers
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: FirstName
+          type: string
+          tags:
+            json: '"first_name"'
+        - name: LastName
+          type: string
+          tags:
+            json: '"last_name"'
+        - name: Phone
+          type: string
+          tags:
+            json: '"phone"'
+        - name: AvatarURL
+          type: string
+          tags:
+            json: '"avatar_url"'
+        - name: Point
+          type: float64
+          tags:
+            gorm: '"-"'
+            json: '"point"'
+        - name: HairkatzPoint
+          type: float64
+          tags:
+            gorm: '"-"'
+            json: '"-"'
+        - name: Email
+          type: string
+          tags:
+            json: '"email"'
+        - name: BirthDay
+          type: '*time.Time'
+          tags:
+            json: '"birth_day"'
+        - name: Address
+          type: string
+          tags:
+            json: '"address"'
+        - name: OutletUID
+          type: id.UniqueID
+          tags:
+            json: '"outlet_uid"'
+      relationships:
+        - source_model_name: Customer
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: Customer
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: Customer
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: Customer
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: Customer
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: Customer
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: Customer
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+    - name: PromotionCouponCode
+      table_name: promotion_coupon_codes
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: PromotionCouponUID
+          type: id.UniqueID
+          tags:
+            gorm: '"not'
+            json: '"promotion_coupon_uid"'
+            null;index: idx_promotion_coupon_code_coupon"
+        - name: Code
+          type: string
+          tags:
+            gorm: '"type:varchar(32);not'
+            json: '"code"'
+            null;index: idx_promotion_coupon_code_code"
+        - name: IsRedeemed
+          type: bool
+          tags:
+            gorm: '"default:false"'
+            json: '"is_redeemed"'
+        - name: RedeemedAt
+          type: '*time.Time'
+          tags:
+            json: '"redeemed_at"'
+        - name: UsageLimit
+          type: '*int'
+          tags:
+            json: '"usage_limit"'
+        - name: CurrentUsage
+          type: int
+          tags:
+            gorm: '"default:0"'
+            json: '"current_usage"'
+        - name: PromotionCoupon
+          type: '*PromotionCoupon'
+          tags:
+            gorm: '"foreignKey:PromotionCouponUID;references:UID"'
+            json: '"promotion_coupon,omitempty"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: PromotionCouponCode
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: PromotionCouponCode
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: PromotionCouponCode
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: PromotionCouponCode
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: PromotionCouponCode
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: PromotionCouponCode
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: PromotionCouponCode
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: PromotionCouponCode
+          target_model_name: PromotionCoupon
+          type: belongs_to
+          foreign_key: PromotionCouponUID
+          references: UID
+          field_name: PromotionCoupon
+    - name: OrderDiscount
+      table_name: order_discounts
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: OrderUID
+          type: id.UniqueID
+          tags:
+            gorm: '"index"'
+            json: '"order_uid"'
+        - name: PromotionDiscountUID
+          type: id.UniqueID
+          tags:
+            json: '"promotion_discount_uid"'
+        - name: PromotionDiscountName
+          type: string
+          tags:
+            json: '"promotion_discount_name"'
+        - name: DiscountType
+          type: string
+          tags:
+            json: '"discount_type"'
+        - name: BenefitType
+          type: string
+          tags:
+            json: '"benefit_type"'
+        - name: BenefitValue
+          type: string
+          tags:
+            json: '"benefit_value"'
+        - name: DiscountAmount
+          type: float64
+          tags:
+            json: '"discount_amount"'
+        - name: QualificationBasis
+          type: string
+          tags:
+            json: '"qualification_basis"'
+        - name: Source
+          type: string
+          tags:
+            json: '"source"'
+        - name: CanCombineWithOther
+          type: bool
+          tags:
+            gorm: '"column:can_combine_with_other_promos"'
+            json: '"can_combine_with_other_promos"'
+        - name: Order
+          type: '*Order'
+          tags:
+            gorm: '"references:UID;foreignKey:OrderUID"'
+            json: '"-"'
+          is_foreign_key: true
+      relationships:
+        - source_model_name: OrderDiscount
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: OrderDiscount
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: OrderDiscount
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: OrderDiscount
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: OrderDiscount
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: OrderDiscount
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: OrderDiscount
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
+        - source_model_name: OrderDiscount
+          target_model_name: Order
+          type: belongs_to
+          foreign_key: OrderUID
+          references: UID
+          field_name: Order
+    - name: FeatureAccess
+      table_name: features_access
+      fields:
+        - name: ID
+          type: int64
+          tags:
+            faker: '"-"'
+            gorm: '"uniqueIndex;uniqueIndex:key_index"'
+            json: '"id"'
+          is_primary_key: true
+          is_embedded: true
+        - name: UID
+          type: id.UniqueID
+          tags:
+            bson: '"_id"'
+            gorm: '"type:varchar(36);uniqueIndex:,where:deleted_at'
+            json: '"uid"'
+          is_embedded: true
+        - name: Flags
+          type: pq.StringArray
+          tags:
+            gorm: '"type:text[]"'
+            json: '"flags"'
+            swaggertype: '"array,string"'
+          is_embedded: true
+        - name: Meta
+          type: map[string]unknown_type_*ast.InterfaceType
+          tags:
+            gorm: '"serializer:json"'
+            json: '"meta"'
+          is_embedded: true
+        - name: CreatedAt
+          type: time.Time
+          tags:
+            bson: '"created_at"'
+            gorm: '"index:created_at;index:,composite:creatable"'
+            json: '"created_at"'
+          is_embedded: true
+        - name: CreatedBy
+          type: string
+          tags:
+            bson: '"created_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:created_by;index:,composite:creatable"'
+            json: '"created_by"'
+          is_embedded: true
+        - name: UpdatedAt
+          type: time.Time
+          tags:
+            bson: '"updated_at"'
+            gorm: '"index:updated_at;index:,composite:updatable"'
+            json: '"updated_at"'
+          is_embedded: true
+        - name: UpdatedBy
+          type: string
+          tags:
+            bson: '"updated_by"'
+            faker: '"uuid_hyphenated"'
+            gorm: '"type:varchar(36);index:updated_by;index:,composite:updatable"'
+            json: '"updated_by"'
+          is_embedded: true
+        - name: DeletedAt
+          type: '*gorm.DeletedAt'
+          tags:
+            bson: '"deleted_at"'
+            faker: '"-"'
+            gorm: '"index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_at"'
+            swaggertype: '"string"'
+          is_embedded: true
+        - name: DeletedBy
+          type: '*string'
+          tags:
+            bson: '"deleted_by"'
+            gorm: '"type:varchar(36);index:deleted_at;index:,composite:deletable"'
+            json: '"deleted_by"'
+          is_embedded: true
+        - name: FeatureUID
+          type: id.UniqueID
+          tags:
+            json: '"feature_uid"'
+        - name: Access
+          type: string
+          tags:
+            gorm: '"name:access"'
+            json: '"access"'
+      relationships:
+        - source_model_name: FeatureAccess
+          target_model_name: FlagableModel
+          type: embedded
+          field_name: FlagableModel
+        - source_model_name: FeatureAccess
+          target_model_name: MetaData
+          type: embedded
+          field_name: MetaData
+        - source_model_name: FeatureAccess
+          target_model_name: CreateableModel
+          type: embedded
+          field_name: CreateableModel
+        - source_model_name: FeatureAccess
+          target_model_name: UpdatableModel
+          type: embedded
+          field_name: UpdatableModel
+        - source_model_name: FeatureAccess
+          target_model_name: DeletableModel
+          type: embedded
+          field_name: DeletableModel
+        - source_model_name: FeatureAccess
+          target_model_name: BaseCrudFields
+          type: embedded
+          field_name: BaseCrudFields
+        - source_model_name: FeatureAccess
+          target_model_name: BaseModel
+          type: embedded
+          field_name: BaseModel
