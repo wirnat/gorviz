@@ -16,11 +16,28 @@ Gorviz is a command-line interface (CLI) tool designed to help Go developers vis
     *   Dynamic filtering and model detailing within the HTML view.
 
 ## Installation
-To install the `gorviz` tool, make sure you have Go installed (version 1.25.3 or later, as per `go.mod`). Then run:
+To install the `gorviz` tool, make sure you have Go installed (version 1.25 or later). Then run:
 ```bash
 go install github.com/wirnat/gorviz@latest
 ```
-This will install the executable in your `$GOPATH/bin` directory, which should be in your system's PATH.
+
+### Troubleshooting: "command not found"
+
+If you run `gorviz` and see `zsh: command not found: gorviz` (or similar), it means your Go bin directory is not in your system's `PATH`.
+
+To fix this permanently, add the Go bin directory to your shell configuration:
+
+**For Zsh (macOS/Linux default):**
+```bash
+echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**For Bash:**
+```bash
+echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
+source ~/.bashrc
+```
 
 ## Usage
 The tool operates in two main steps: `init` to parse your Go code and generate a schema, and `compile` to create the HTML visualization.
