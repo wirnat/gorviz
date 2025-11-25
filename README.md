@@ -57,7 +57,7 @@ The tool operates in two main steps: `init` to parse your Go code and generate a
     This will generate a `gorviz.html` file in the current working directory. Open this file in your web browser to view your GORM schema ERD.
 
 ## Demo
-![Gorviz Demo](src/demo.gif)
+![Gorviz Demo](src/demo2.gif)
 
 ## Contributing
 We welcome contributions! Please feel free to fork the repository, create a feature branch, commit your changes, and open a pull request.
