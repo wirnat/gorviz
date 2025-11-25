@@ -18,7 +18,7 @@ Gorviz is a command-line interface (CLI) tool designed to help Go developers vis
 ## Installation
 To install the `gorviz` tool, make sure you have Go installed (version 1.25.3 or later, as per `go.mod`). Then run:
 ```bash
-go install gorviz
+go install github.com/wirnat/gorviz@latest
 ```
 This will install the executable in your `$GOPATH/bin` directory, which should be in your system's PATH.
 
