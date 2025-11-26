@@ -1,0 +1,10 @@
+{"timestamp":"2025-11-26T03:11:46.103Z","level":"INFO","message":"gibRun MCP Server running on stdio","meta":{"transport":"stdio"}}
+{"timestamp":"2025-11-26T03:11:46.099Z","level":"INFO","message":"Initializing gibRun MCP server"}
+{"timestamp":"2025-11-26T03:11:46.759Z","level":"INFO","message":"Go debugger stderr","meta":{"message":"time=2025-11-26T11:11:46.759+08:00 level=INFO msg=\"Starting MCP Go Debugger\" version=dev","command":"mcp-go-debugger"}}
+{"timestamp":"2025-11-26T03:11:46.760Z","level":"INFO","message":"Go debugger stderr","meta":{"message":"time=2025-11-26T11:11:46.759+08:00 level=INFO msg=\"Starting MCP server...\"","command":"mcp-go-debugger"}}
+{"timestamp":"2025-11-26T03:11:46.760Z","level":"INFO","message":"Connected to Go debugger server","meta":{"command":"mcp-go-debugger"}}
+{"timestamp":"2025-11-26T03:12:37.578Z","level":"INFO","message":"Initializing gibRun MCP server"}
+{"timestamp":"2025-11-26T03:12:37.582Z","level":"INFO","message":"gibRun MCP Server running on stdio","meta":{"transport":"stdio"}}
+{"timestamp":"2025-11-26T03:12:37.603Z","level":"INFO","message":"Go debugger stderr","meta":{"message":"time=2025-11-26T11:12:37.603+08:00 level=INFO msg=\"Starting MCP Go Debugger\" version=dev","command":"mcp-go-debugger"}}
+{"timestamp":"2025-11-26T03:12:37.604Z","level":"INFO","message":"Go debugger stderr","meta":{"message":"time=2025-11-26T11:12:37.603+08:00 level=INFO msg=\"Starting MCP server...\"","command":"mcp-go-debugger"}}
+{"timestamp":"2025-11-26T03:12:37.604Z","level":"INFO","message":"Connected to Go debugger server","meta":{"command":"mcp-go-debugger"}}
